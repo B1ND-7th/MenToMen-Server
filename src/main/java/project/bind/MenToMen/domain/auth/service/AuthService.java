@@ -4,7 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import project.bind.MenToMen.domain.auth.dto.*;
+import project.bind.MenToMen.domain.auth.dto.api.DAuthApiRequestDto;
+import project.bind.MenToMen.domain.auth.dto.api.DAuthTokenResponseDto;
+import project.bind.MenToMen.domain.auth.dto.api.UserInfoDataResponseDto;
+import project.bind.MenToMen.domain.auth.dto.api.UserInfoResponseDto;
+import project.bind.MenToMen.domain.auth.dto.res.DAuthClientResponseDto;
+import project.bind.MenToMen.domain.auth.dto.res.TokenResponseDto;
 import project.bind.MenToMen.domain.user.service.UserService;
 import project.bind.MenToMen.global.config.jwt.JwtUtil;
 

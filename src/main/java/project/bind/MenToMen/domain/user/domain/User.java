@@ -31,6 +31,5 @@ public class User {
     private StdInfo stdInfo;
 
     @Enumerated(EnumType.STRING)
-//    @Column(nullable = false)
     private Roles roles;
 }

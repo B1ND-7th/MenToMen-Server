@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.auth.dto;
+package project.bind.MenToMen.domain.auth.dto.api;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
