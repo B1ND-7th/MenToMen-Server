@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.bind.MenToMen.domain.user.domain.User;
-import project.bind.MenToMen.domain.user.dto.AccessTokenDto;
-import project.bind.MenToMen.global.annotation.CheckLogin;
+import project.bind.MenToMen.global.annotation.CheckToken;
 import project.bind.MenToMen.global.response.DataResponse;
 
 @RestController
@@ -16,15 +15,9 @@ import project.bind.MenToMen.global.response.DataResponse;
 @Slf4j
 public class UserController {
 
-    @CheckLogin
-    @GetMapping("/login")
-    public void login(@RequestAttribute("user") User user) {
-        log.info(user.getName());
-    }
-
-    @CheckLogin
-    @GetMapping("/accessToken")
-    public ResponseEntity<DataResponse<AccessTokenDto>> getAccessToken(@RequestAttribute("accessToken") AccessTokenDto accessTokenDto) {
-        return DataResponse.ok("토큰 생성 성공", accessTokenDto);
+    @CheckToken
+    @GetMapping("/my")
+    public ResponseEntity<DataResponse<User>> login(@RequestAttribute("user") User user) {
+        return DataResponse.ok("유저 정보 조회 성공", user);
     }
 }

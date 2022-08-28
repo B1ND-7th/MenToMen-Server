@@ -3,8 +3,13 @@ package project.bind.MenToMen.domain.auth.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.bind.MenToMen.domain.auth.dto.*;
+import project.bind.MenToMen.domain.auth.dto.api.DAuthApiRequestDto;
+import project.bind.MenToMen.domain.auth.dto.req.DAuthClientRequestDto;
+import project.bind.MenToMen.domain.auth.dto.res.DAuthClientResponseDto;
+import project.bind.MenToMen.domain.auth.dto.res.TokenResponseDto;
 import project.bind.MenToMen.domain.auth.service.AuthService;
+import project.bind.MenToMen.domain.auth.dto.res.AccessTokenDto;
+import project.bind.MenToMen.global.annotation.CheckToken;
 import project.bind.MenToMen.global.response.DataResponse;
 
 @RestController
@@ -29,5 +34,11 @@ public class AuthController {
         System.out.println("accessToken = " + token.getAccessToken());
         System.out.println("refreshToken = " + token.getRefreshToken());
         return DataResponse.ok("인증 성공", token);
+    }
+
+    @CheckToken
+    @GetMapping("/refreshToken")
+    public ResponseEntity<DataResponse<AccessTokenDto>> getAccessToken(@RequestAttribute("accessToken") AccessTokenDto accessTokenDto) {
+        return DataResponse.ok("토큰 생성 성공", accessTokenDto);
     }
 }
