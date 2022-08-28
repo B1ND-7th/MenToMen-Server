@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DB_ADDRESS}:${DB_PORT}/campus?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://${DB_ADDRESS}:${DB_PORT}/mentomen?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ${DB_USER}
     password: ${DB_PW}
     driver-class-name: com.mysql.cj.jdbc.Driver
