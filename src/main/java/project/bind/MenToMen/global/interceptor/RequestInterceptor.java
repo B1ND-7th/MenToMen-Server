@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import project.bind.MenToMen.domain.user.domain.User;
-import project.bind.MenToMen.domain.user.dto.AccessTokenDto;
-import project.bind.MenToMen.global.annotation.CheckLogin;
+import project.bind.MenToMen.domain.auth.dto.res.AccessTokenDto;
+import project.bind.MenToMen.global.annotation.CheckToken;
 import project.bind.MenToMen.global.config.jwt.JwtUtil;
 import project.bind.MenToMen.global.config.jwt.TokenType;
 
@@ -30,7 +30,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
-        if (!(handlerMethod.getMethod().isAnnotationPresent(CheckLogin.class))) {
+        if (!(handlerMethod.getMethod().isAnnotationPresent(CheckToken.class))) {
             return true;
         }
 
@@ -39,12 +39,7 @@ public class RequestInterceptor implements HandlerInterceptor {
         TokenType tokenType = jwtUtil.checkTokenType(token);
         User user = jwtUtil.getUserByToken(token);
 
-        if(tokenType == TokenType.RefreshToken) {
-
-            String accessToken = jwtUtil.generateAccessToken(user.getEmail());
-            AccessTokenDto accessTokenDto = new AccessTokenDto(accessToken);
-            request.setAttribute("accessToken", accessTokenDto);
-
+        if (checkTokenType(request, tokenType, user) == true) {
             return true;
         }
 
@@ -64,5 +59,16 @@ public class RequestInterceptor implements HandlerInterceptor {
         }
 
         return Strings.EMPTY;
+    }
+
+    private boolean checkTokenType(HttpServletRequest request, TokenType tokenType, User user) {
+        if (tokenType.equals(TokenType.RefreshToken)) {
+
+            String accessToken = jwtUtil.generateAccessToken(user.getEmail());
+            AccessTokenDto accessTokenDto = new AccessTokenDto(accessToken);
+            request.setAttribute("accessToken", accessTokenDto);
+
+            return true;
+        } else return false;
     }
 }
