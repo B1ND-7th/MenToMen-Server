@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.user.dto;
+package project.bind.MenToMen.domain.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

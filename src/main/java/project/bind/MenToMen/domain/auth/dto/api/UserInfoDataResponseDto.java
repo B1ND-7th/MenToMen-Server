@@ -3,6 +3,7 @@ package project.bind.MenToMen.domain.auth.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.bind.MenToMen.domain.user.domain.Roles;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -24,6 +25,7 @@ public class UserInfoDataResponseDto {
                 .email(email)
                 .profileImage(profileImage)
                 .stdInfo(new StdInfo(grade, room, number))
+                .roles(Roles.USER)
                 .build();
     }
 }
