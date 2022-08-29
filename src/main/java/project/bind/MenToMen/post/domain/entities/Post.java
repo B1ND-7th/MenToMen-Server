@@ -1,15 +1,13 @@
 package project.bind.MenToMen.post.domain.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "post")
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Post {
 
@@ -19,11 +17,13 @@ public class Post {
 //    @ManyToOne()
 //    private Long uniqueId;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Tags tags;
 
+    @Column(nullable = false)
     private LocalDateTime dateTime;
 
-    @Column()
+    @Column(nullable = false)
     private String content;
 }
