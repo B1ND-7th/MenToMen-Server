@@ -17,7 +17,7 @@ public class Post {
     private Long postId;
 
 //    @ManyToOne()
-//    private Long ;
+//    private Long uniqueId;
 
     @Enumerated(EnumType.STRING)
     private Tags tags;
