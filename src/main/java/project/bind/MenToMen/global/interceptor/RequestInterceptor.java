@@ -62,7 +62,7 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     private boolean checkTokenType(HttpServletRequest request, TokenType tokenType, User user) {
-        if (tokenType.equals(TokenType.RefreshToken)) {
+        if (tokenType.equals(TokenType.REFRESHTOKEN)) {
 
             String accessToken = jwtUtil.generateAccessToken(user.getEmail());
             AccessTokenDto accessTokenDto = new AccessTokenDto(accessToken);

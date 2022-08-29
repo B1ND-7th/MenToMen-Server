@@ -3,6 +3,7 @@ package project.bind.MenToMen.global.config.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.events.EventException;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -20,11 +21,10 @@ public class JwtUtil {
 
     private final UserService userService;
 
-    private String SECRET_KEY = "jwt_auth_secret_key_for_login_user";
+    @Value("${product.jwt-secret-key}")
+    private String SECRET_KEY;
 
-//    private static final Long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 3600 * 8; // 8시간
-    private static final Long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 60; // 1분
-//    private static final Long REFRESH_TOKEN_EXPIRE_TIME = 1000L * 3600 * 24; // 24시간
+    private static final Long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 1800; // 30분
     private static final Long REFRESH_TOKEN_EXPIRE_TIME = 1000L * 3600 * 24; // 24시간
 
     private Key getSignKey(String secretKey) {
@@ -48,11 +48,11 @@ public class JwtUtil {
     }
 
     public String generateAccessToken(String email) {
-        return generateToken(email, ACCESS_TOKEN_EXPIRE_TIME, TokenType.AccessToken);
+        return generateToken(email, ACCESS_TOKEN_EXPIRE_TIME, TokenType.ACCESSTOKEN);
     }
 
     public String generateRefreshToken(String email) {
-        return generateToken(email, REFRESH_TOKEN_EXPIRE_TIME, TokenType.RefreshToken);
+        return generateToken(email, REFRESH_TOKEN_EXPIRE_TIME, TokenType.REFRESHTOKEN);
     }
 
     public Claims extractAllClaims(String token) throws ExpiredJwtException, IllegalArgumentException, UnsupportedJwtException, MalformedJwtException {
@@ -75,9 +75,9 @@ public class JwtUtil {
 
     public TokenType checkTokenType(String token) {
         if ("RefreshToken".equals(extractAllClaims(token).get("type"))) {
-            return TokenType.RefreshToken;
+            return TokenType.REFRESHTOKEN;
         } else {
-            return TokenType.AccessToken;
+            return TokenType.ACCESSTOKEN;
         }
     }
 
