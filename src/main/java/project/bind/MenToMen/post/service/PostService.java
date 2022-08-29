@@ -1,10 +1,16 @@
 package project.bind.MenToMen.post.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.post.domain.dto.PostSubmitDto;
 import project.bind.MenToMen.post.domain.entities.Post;
 
-public interface PostService {
+@Service
+@Transactional
+public class PostService {
 
-    Post submit(PostSubmitDto postSubmitDto);
+    public Post submit(PostSubmitDto postSubmitDto) {
+        return null;
+    }
 
 }
