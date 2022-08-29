@@ -1,6 +1,7 @@
 package project.bind.MenToMen.domain.auth.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.auth.dto.api.DAuthApiRequestDto;
@@ -19,9 +20,12 @@ public class AuthController {
 
     private final AuthService authService;
 
-    private String clientId = "39bc523458c14eb987b7b16175426a31a9f105b7f5814f1f9eca7d454bd23c73";
-    private String clientSecret = "e90b070b437f420eb788fad746e97a507984328ddf9142f481397ca6e7afda0e";
-    private String redirectUrl = "http://localhost:3000/callback";
+    @Value("${product.client-id}")
+    private String clientId;
+    @Value("${product.client-secret}")
+    private String clientSecret;
+    @Value("${product.redirect-url}")
+    private String redirectUrl;
 
     @GetMapping("/url")
     public DAuthClientResponseDto reqUrl(){
