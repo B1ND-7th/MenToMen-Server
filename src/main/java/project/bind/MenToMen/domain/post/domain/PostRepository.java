@@ -5,6 +5,4 @@ import project.bind.MenToMen.domain.user.domain.User;
 
 public interface PostRepository extends JpaRepository<User, Long> {
 
-
-
 }

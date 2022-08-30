@@ -14,10 +14,4 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class PostController {
 
-    @PostMapping(value = "/submit")
-    public String submit(final @Valid @RequestBody PostSubmitDto postSubmitDto) {
-
-        return "";
-    }
-
 }

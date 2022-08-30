@@ -14,9 +14,8 @@ public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-/*  TODO:  merge하면 사용함
-    @ManyToOne()
-    private Long uniqueId;*/
+/*    @ManyToOne()
+    private Long id;*/
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
