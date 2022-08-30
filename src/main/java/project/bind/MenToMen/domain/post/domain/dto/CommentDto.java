@@ -1,4 +1,4 @@
-package project.bind.MenToMen.post.domain.dto;
+package project.bind.MenToMen.domain.post.domain.dto;
 
 import lombok.Getter;
 
