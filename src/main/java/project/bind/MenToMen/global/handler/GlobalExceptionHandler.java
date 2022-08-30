@@ -1,4 +1,4 @@
-package project.bind.MenToMen.global.hander;
+package project.bind.MenToMen.global.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
