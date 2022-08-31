@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import project.bind.MenToMen.domain.auth.dto.api.DAuthApiRequestDto;
 import project.bind.MenToMen.domain.auth.dto.api.DAuthTokenResponseDto;
-import project.bind.MenToMen.domain.auth.dto.api.UserInfoDataResponseDto;
-import project.bind.MenToMen.domain.auth.dto.api.UserInfoResponseDto;
+import project.bind.MenToMen.domain.auth.dto.api.DAuthUserInfoDataResponseDto;
+import project.bind.MenToMen.domain.auth.dto.api.DAuthUserInfoResponseDto;
 import project.bind.MenToMen.domain.auth.dto.res.DAuthClientResponseDto;
 import project.bind.MenToMen.domain.auth.dto.res.TokenResponseDto;
 import project.bind.MenToMen.domain.user.service.UserService;
@@ -51,16 +51,16 @@ public class AuthService {
 
         String url = "http://open.dodam.b1nd.com/api/user";
 
-        UserInfoResponseDto infoResponseDto = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), UserInfoResponseDto.class).getBody();
+        DAuthUserInfoResponseDto infoResponseDto = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), DAuthUserInfoResponseDto.class).getBody();
         userService.save(infoResponseDto.getData().toEntity());
 
         return getUserToken(infoResponseDto.getData());
     }
 
-    public TokenResponseDto getUserToken(UserInfoDataResponseDto userInfoDataResponseDto) {
+    public TokenResponseDto getUserToken(DAuthUserInfoDataResponseDto DAuthUserInfoDataResponseDto) {
         return TokenResponseDto.builder()
-                .accessToken(jwtUtil.generateAccessToken(userInfoDataResponseDto.getEmail()))
-                .refreshToken(jwtUtil.generateRefreshToken(userInfoDataResponseDto.getEmail()))
+                .accessToken(jwtUtil.generateAccessToken(DAuthUserInfoDataResponseDto.getEmail()))
+                .refreshToken(jwtUtil.generateRefreshToken(DAuthUserInfoDataResponseDto.getEmail()))
                 .build();
     }
 }
