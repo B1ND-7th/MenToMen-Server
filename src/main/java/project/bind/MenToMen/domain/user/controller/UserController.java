@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.bind.MenToMen.domain.user.domain.User;
+import project.bind.MenToMen.domain.user.dto.UserInfoResponseDto;
 import project.bind.MenToMen.global.annotation.CheckToken;
 import project.bind.MenToMen.global.response.DataResponse;
 
@@ -21,7 +22,13 @@ public class UserController {
     @CheckToken
     @ApiOperation(value = "AccessToken 인증으로 내정보 받기")
     @GetMapping("/my")
-    public ResponseEntity<DataResponse<User>> login(@RequestAttribute("user") User user) {
-        return DataResponse.ok("유저 정보 조회 성공", user);
+    public ResponseEntity<DataResponse<UserInfoResponseDto>> login(@RequestAttribute("user") User user) {
+        UserInfoResponseDto responseDto = UserInfoResponseDto.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .profileImage(user.getProfileImage())
+                .roles(user.getRoles())
+                .stdInfo(user.getStdInfo()).build();
+        return DataResponse.ok("유저 정보 조회 성공", responseDto);
     }
 }
