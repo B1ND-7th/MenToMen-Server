@@ -1,30 +1,39 @@
-package project.bind.MenToMen.domain.post.domain.entities;
+package project.bind.MenToMen.domain.post.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.bind.MenToMen.domain.user.domain.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "post")
+@Entity
+@Table(name = "post")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Post {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+    @Column(name = "post_id")
+    private Long Id;
 
-/*  TODO:  merge하면 사용함
-    @ManyToOne()
-    private Long uniqueId;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Tags tags;
 
     @Column(nullable = false)
-    private LocalDateTime dateTime;
+    private LocalDateTime postDateTime;
 
-    @Column(nullable = false)
+    private String imgUrl;
+
+    @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
 }

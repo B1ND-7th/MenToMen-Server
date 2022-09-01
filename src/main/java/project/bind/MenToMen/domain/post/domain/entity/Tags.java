@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.post.domain.entities;
+package project.bind.MenToMen.domain.post.domain.entity;
 
 import lombok.Getter;
 
