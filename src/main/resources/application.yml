@@ -1,4 +1,9 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      location: C:\Users\user\Documents\GitHub\MenToMen\src\main\resources\static
   datasource:
     url: jdbc:mysql://${DB_ADDRESS}:${DB_PORT}/mentomen?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ${DB_USER}
@@ -17,6 +22,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+    static-path-pattern: /static/**
 
 logging:
   level:
@@ -32,3 +38,4 @@ product:
   client-secret: ${CLIENT_SECRET}
   redirect-url: ${REDIRECT_URL}
   jwt-secret-key: ${JWT_SECRET_KEY}
+  IPv4: ${IPv4}
