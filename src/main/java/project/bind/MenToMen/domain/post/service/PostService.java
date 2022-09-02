@@ -43,7 +43,7 @@ public class PostService {
 
     public List<PostsResponseDto> findPostAll() {
         return postRepository.findAll().stream()
-                .map(post -> new PostsResponseDto(post))
+                .map(post -> new PostsResponseDto(post, IP))
                 .collect(Collectors.toList());
     }
 
@@ -51,6 +51,6 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(() -> {
             throw CustomError.of(ErrorCode.NOT_FOUND);
         });
-        return new PostResponseDto(post);
+        return new PostResponseDto(post, IP);
     }
 }

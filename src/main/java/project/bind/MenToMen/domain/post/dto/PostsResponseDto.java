@@ -24,11 +24,11 @@ public class PostsResponseDto {
     private String userName;
     private String profileUrl;
 
-    public PostsResponseDto(Post post) {
+    public PostsResponseDto(Post post, String IP) {
         this.tags = post.getTags();
         this.localDateTime = post.getPostDateTime();
         this.content = post.getContent();
-        this.imgUrl = post.getImgUrl();
+        this.imgUrl = "http://" + IP + ":8080" + post.getImgUrl();
         this.postId = post.getId();
         this.userId = post.getUser().getId();
         this.userName = post.getUser().getName();
