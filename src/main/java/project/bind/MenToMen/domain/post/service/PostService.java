@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
+import project.bind.MenToMen.domain.post.domain.entity.Tags;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
-import project.bind.MenToMen.domain.user.domain.UserRepository;
 import project.bind.MenToMen.global.error.CustomError;
 import project.bind.MenToMen.global.error.ErrorCode;
 
@@ -27,18 +27,10 @@ public class PostService {
     private String IP;
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
 
     @Transactional
-    public Post post(PostSubmitDto postSubmitDto) {
-        User user = checkUser(postSubmitDto.getUserId());
+    public Post post(PostSubmitDto postSubmitDto, User user) {
         return postRepository.save(postSubmitDto.toEntity(postSubmitDto, user));
-    }
-
-    private User checkUser(Long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> {
-            throw CustomError.of(ErrorCode.NOT_FOUND);
-        });
     }
 
     public List<PostsResponseDto> findPostAll() {
@@ -52,5 +44,11 @@ public class PostService {
             throw CustomError.of(ErrorCode.NOT_FOUND);
         });
         return new PostResponseDto(post, IP);
+    }
+
+    public List<PostsResponseDto> findPostByTag(Tags tag) {
+        return postRepository.findByTag(tag).stream()
+                .map( post -> new PostsResponseDto(post, IP))
+                .collect(Collectors.toList());
     }
 }

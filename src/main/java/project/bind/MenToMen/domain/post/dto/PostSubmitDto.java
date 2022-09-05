@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostSubmitDto {
 
-    private Long userId;
     @ApiModelProperty(example = "받은 이미지 Url")
     private String imgUrl;
     @ApiModelProperty(example = "태그")
