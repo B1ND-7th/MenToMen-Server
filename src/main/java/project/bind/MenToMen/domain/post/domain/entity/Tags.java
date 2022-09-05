@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum Tags {
-    FRONTEND,
-    BACKEND,
+    WEB,
+    SERVER,
     IOS,
     ANDROID,
     DESIGN
