@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.bind.MenToMen.domain.user.domain.Roles;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
+import project.bind.MenToMen.domain.user.domain.User;
 
 @Getter
 @Builder
@@ -18,4 +19,12 @@ public class UserInfoResponseDto {
     private String profileImage;
     private StdInfo stdInfo;
     private Roles roles;
+
+    public UserInfoResponseDto(User user) {
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.profileImage = user.getProfileImage();
+        this.stdInfo = user.getStdInfo();
+        this.roles = user.getRoles();
+    }
 }
