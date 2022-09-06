@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.post.domain.entity.Tags;
+import project.bind.MenToMen.domain.user.domain.StdInfo;
 
 import java.time.LocalDateTime;
 
@@ -20,18 +21,18 @@ public class PostsResponseDto {
     private String content;
     private String imgUrl;
     private Long postId;
-    private Long userId;
     private String userName;
     private String profileUrl;
+    private StdInfo stdInfo;
 
-    public PostsResponseDto(Post post, String IP) {
+    public PostsResponseDto(Post post) {
         this.tags = post.getTags();
         this.localDateTime = post.getPostDateTime();
         this.content = post.getContent();
-        this.imgUrl = "http://" + IP + ":8080" + post.getImgUrl();
+        this.imgUrl = post.getImgUrl();
         this.postId = post.getId();
-        this.userId = post.getUser().getId();
         this.userName = post.getUser().getName();
         this.profileUrl = post.getUser().getProfileImage();
+        this.stdInfo = post.getUser().getStdInfo();
     }
 }

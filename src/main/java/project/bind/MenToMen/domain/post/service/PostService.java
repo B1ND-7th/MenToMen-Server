@@ -2,7 +2,6 @@ package project.bind.MenToMen.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
@@ -23,9 +22,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PostService {
 
-    @Value("${product.IPv4}")
-    private String IP;
-
     private final PostRepository postRepository;
 
     @Transactional
@@ -35,7 +31,7 @@ public class PostService {
 
     public List<PostsResponseDto> findPostAll() {
         return postRepository.findAll().stream()
-                .map(post -> new PostsResponseDto(post, IP))
+                .map(post -> new PostsResponseDto(post))
                 .collect(Collectors.toList());
     }
 
@@ -43,12 +39,12 @@ public class PostService {
         Post post = postRepository.findById(postId).orElseThrow(() -> {
             throw CustomError.of(ErrorCode.NOT_FOUND);
         });
-        return new PostResponseDto(post, IP);
+        return new PostResponseDto(post);
     }
 
     public List<PostsResponseDto> findPostByTag(Tags tag) {
         return postRepository.findByTag(tag).stream()
-                .map( post -> new PostsResponseDto(post, IP))
+                .map( post -> new PostsResponseDto(post))
                 .collect(Collectors.toList());
     }
 }
