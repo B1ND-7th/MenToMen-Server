@@ -22,3 +22,6 @@ logging:
 server:
   servlet:
     encoding.force-response: true
+
+product:
+  jwt-secret-key: ${JWT_SECRET_KEY}
