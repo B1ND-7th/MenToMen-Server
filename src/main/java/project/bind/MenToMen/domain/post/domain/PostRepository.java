@@ -1,5 +1,6 @@
 package project.bind.MenToMen.domain.post.domain;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,11 +14,11 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p join fetch p.user u")
-    List<Post> findAll();
+    List<Post> findAll(Sort sort);
 
     @Query("select p from Post p join fetch p.user u where p.Id=:id")
     Optional<Post> findById(Long id);
 
     @Query("select p from Post p join fetch p.user u where p.tags=:tag")
-    List<Post> findByTag(Tags tag);
+    List<Post> findAllByTag(Tags tag, Sort sort);
 }
