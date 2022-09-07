@@ -2,9 +2,7 @@ package project.bind.MenToMen.domain.post.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.post.domain.entity.Tags;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -13,8 +11,6 @@ import java.time.LocalDateTime;
 
 @ApiModel
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class PostSubmitDto {
 
     @ApiModelProperty(example = "받은 이미지 Url")
