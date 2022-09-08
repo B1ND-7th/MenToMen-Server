@@ -1,12 +1,13 @@
 package project.bind.MenToMen.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
 import project.bind.MenToMen.domain.post.domain.entity.Tags;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
+import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
@@ -18,19 +19,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
-@Slf4j
 public class PostService {
 
     private final PostRepository postRepository;
 
     @Transactional
-    public Post post(PostSubmitDto postSubmitDto, User user) {
-        return postRepository.save(postSubmitDto.toEntity(postSubmitDto, user));
+    public void post(PostSubmitDto postSubmitDto, User user) {
+        postRepository.save(postSubmitDto.toEntity(postSubmitDto, user));
     }
 
     public List<PostsResponseDto> findPostAll() {
-        return postRepository.findAll().stream()
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC, "Id")).stream()
                 .map(post -> new PostsResponseDto(post))
                 .collect(Collectors.toList());
     }
@@ -43,8 +44,32 @@ public class PostService {
     }
 
     public List<PostsResponseDto> findPostByTag(Tags tag) {
-        return postRepository.findByTag(tag).stream()
+        return postRepository.findAllByTag(tag, Sort.by(Sort.Direction.DESC, "Id")).stream()
                 .map( post -> new PostsResponseDto(post))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void update(PostUpdateDto postUpdateDto, User user) {
+        postRepository.findById(postUpdateDto.getPostId()).ifPresentOrElse(
+                post -> {
+                    User postUser = post.getUser();
+                    if(user.getId().equals(postUser.getId())) {
+                        post.updateInfo(postUpdateDto);
+                    } else throw CustomError.of(ErrorCode.WRONG_USER);
+                },
+                () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
+    }
+
+    @Transactional
+    public void delete(Long postId, User user) {
+        postRepository.findById(postId).ifPresentOrElse(
+                post -> {
+                    User postUser = post.getUser();
+                    if(user.getId().equals(postUser.getId())) {
+                        postRepository.delete(post);
+                    } else throw CustomError.of(ErrorCode.WRONG_USER);
+                },
+                () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
     }
 }

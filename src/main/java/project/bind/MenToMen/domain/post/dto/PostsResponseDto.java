@@ -18,6 +18,7 @@ public class PostsResponseDto {
     @ApiModelProperty(example = "기술 태그")
     private Tags tags;
     private LocalDateTime localDateTime;
+    @ApiModelProperty(example = "본문")
     private String content;
     private String imgUrl;
     private Long postId;

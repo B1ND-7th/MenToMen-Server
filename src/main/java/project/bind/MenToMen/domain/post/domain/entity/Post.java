@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.user.domain.User;
 
 import javax.persistence.*;
@@ -36,4 +37,10 @@ public class Post {
 
     @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
+
+    public void updateInfo(PostUpdateDto postUpdateDto) {
+        this.tags = postUpdateDto.getTags();
+        this.content = postUpdateDto.getContent();
+        this.imgUrl = postUpdateDto.getImgUrl();
+    }
 }

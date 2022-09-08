@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.post.domain.entity.Tags;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
+import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.service.PostService;
@@ -49,5 +50,21 @@ public class PostController {
     @GetMapping("/readAll/{tag}")
     public ResponseEntity<DataResponse<List<PostsResponseDto>>> readAllByTag(@PathVariable("tag")Tags tag) {
         return DataResponse.ok("태그로 게시물 조회 성공", postService.findPostByTag(tag));
+    }
+
+    @CheckToken
+    @ApiOperation(value = "게시물 수정")
+    @PatchMapping("/update")
+    public ResponseEntity<Response> update(@RequestAttribute("user")User user, @RequestBody PostUpdateDto postUpdateDto) {
+        postService.update(postUpdateDto, user);
+        return Response.ok("게시물 수정 성공");
+    }
+
+    @CheckToken
+    @ApiOperation(value = "게시물 삭제")
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<Response> delete(@RequestAttribute("user")User user, @PathVariable("postId")Long postId) {
+        postService.delete(postId, user);
+        return Response.ok("게시물 삭제 성공");
     }
 }

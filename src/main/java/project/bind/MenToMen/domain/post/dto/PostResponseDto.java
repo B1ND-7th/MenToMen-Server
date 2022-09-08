@@ -18,12 +18,14 @@ public class PostResponseDto {
     @ApiModelProperty(example = "기술 태그")
     private Tags tags;
     private LocalDateTime localDateTime;
+    @ApiModelProperty(example = "본문")
     private String content;
     private String imgUrl;
     private Long postId;
     private String userName;
     private String profileUrl;
     private StdInfo stdInfo;
+    private Long author;
 
     public PostResponseDto(Post post) {
         this.tags = post.getTags();
@@ -34,5 +36,6 @@ public class PostResponseDto {
         this.userName = post.getUser().getName();
         this.profileUrl = post.getUser().getProfileImage();
         this.stdInfo = post.getUser().getStdInfo();
+        this.author = post.getUser().getId();
     }
 }
