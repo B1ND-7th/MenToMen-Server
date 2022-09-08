@@ -14,6 +14,7 @@ import project.bind.MenToMen.domain.user.domain.User;
 @AllArgsConstructor
 public class UserInfoResponseDto {
 
+    private Long userId;
     private String name;
     private String email;
     private String profileImage;
@@ -21,6 +22,7 @@ public class UserInfoResponseDto {
     private Roles roles;
 
     public UserInfoResponseDto(User user) {
+        this.userId = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.profileImage = user.getProfileImage();
