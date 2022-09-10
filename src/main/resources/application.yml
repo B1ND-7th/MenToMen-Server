@@ -13,10 +13,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    #              ddl-auto: none
     properties:
       hibernate:
-#        show_sql: true
         format_sql: true
 
   mvc:
@@ -28,14 +26,26 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+    com.amazonaws.util.EC2MetadataUtils: error
 
 server:
   servlet:
     encoding.force-response: true
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}
+    s3:
+      bucket: ${BUCKET_NAME}
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
 
 product:
   client-id: ${CLIENT_ID}
   client-secret: ${CLIENT_SECRET}
   redirect-url: ${REDIRECT_URL}
   jwt-secret-key: ${JWT_SECRET_KEY}
-  IPv4: ${IPv4}
