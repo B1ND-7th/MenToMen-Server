@@ -1,35 +1,35 @@
 package project.bind.MenToMen.domain.file.service;
 
-import lombok.extern.slf4j.Slf4j;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import project.bind.MenToMen.domain.file.dto.ImgUrlResponseDto;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
-@Slf4j
+@RequiredArgsConstructor
 public class FileService {
 
-    public List<ImgUrlResponseDto> transferFile(List<MultipartFile> fileList) {
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 
-        return fileList.stream().map( file -> post(file))
-                .collect(Collectors.toList());
-    }
+    private final AmazonS3Client s3Client;
 
-    public ImgUrlResponseDto post(MultipartFile file) {
+    public ImgUrlResponseDto upload(MultipartFile file) throws IOException {
 
-        if( !file.isEmpty() ) {
-            log.info("file name = " + file.getOriginalFilename());
-            try {
-                file.transferTo(new File(file.getOriginalFilename()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return new ImgUrlResponseDto("/static/" + file.getOriginalFilename());
+        String s3FileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
+        metadata.setContentType(file.getContentType());
+
+        s3Client.putObject(bucket, s3FileName, file.getInputStream(), metadata);
+
+        return new ImgUrlResponseDto(s3Client.getUrl(bucket, s3FileName).toString());
     }
 }
