@@ -3,7 +3,7 @@ package project.bind.MenToMen.domain.post.domain.entity;
 import lombok.Getter;
 
 @Getter
-public enum Tags {
+public enum Tag {
     WEB,
     SERVER,
     IOS,

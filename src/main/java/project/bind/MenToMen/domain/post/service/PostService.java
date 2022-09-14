@@ -5,7 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
-import project.bind.MenToMen.domain.post.domain.entity.Tags;
+import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
@@ -43,7 +43,7 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    public List<PostsResponseDto> findPostByTag(Tags tag) {
+    public List<PostsResponseDto> findPostByTag(Tag tag) {
         return postRepository.findAllByTag(tag, Sort.by(Sort.Direction.DESC, "Id")).stream()
                 .map( post -> new PostsResponseDto(post))
                 .collect(Collectors.toList());

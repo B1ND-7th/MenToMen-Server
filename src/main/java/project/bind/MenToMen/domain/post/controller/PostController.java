@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.bind.MenToMen.domain.post.domain.entity.Tags;
+import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
@@ -48,7 +48,7 @@ public class PostController {
 
     @ApiOperation(value = "태그로 게시물 조회")
     @GetMapping("/readAll/{tag}")
-    public ResponseEntity<DataResponse<List<PostsResponseDto>>> readAllByTag(@PathVariable("tag")Tags tag) {
+    public ResponseEntity<DataResponse<List<PostsResponseDto>>> readAllByTag(@PathVariable("tag") Tag tag) {
         return DataResponse.ok("태그로 게시물 조회 성공", postService.findPostByTag(tag));
     }
 

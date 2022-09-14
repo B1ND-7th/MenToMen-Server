@@ -28,7 +28,7 @@ public class Post {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Tags tags;
+    private Tag tag;
 
     @Column(nullable = false)
     private LocalDateTime postDateTime;
@@ -39,7 +39,7 @@ public class Post {
     private String content;
 
     public void updateInfo(PostUpdateDto postUpdateDto) {
-        this.tags = postUpdateDto.getTags();
+        this.tag = postUpdateDto.getTag();
         this.content = postUpdateDto.getContent();
         this.imgUrl = postUpdateDto.getImgUrl();
     }
