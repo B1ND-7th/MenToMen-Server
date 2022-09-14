@@ -1,9 +1,6 @@
 package project.bind.MenToMen.domain.post.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -13,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "post")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class Post {
