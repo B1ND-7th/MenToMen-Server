@@ -25,14 +25,14 @@ public class UserController {
     @CheckToken
     @ApiOperation(value = "AccessToken 인증으로 내정보 받기")
     @GetMapping("/my")
-    public ResponseEntity<DataResponse<UserInfoResponseDto>> login(@RequestAttribute("user") User user) {
+    public ResponseEntity<DataResponse<UserInfoResponseDto>> login(@RequestAttribute User user) {
         return DataResponse.ok("유저 정보 조회 성공", new UserInfoResponseDto(user));
     }
 
     @CheckToken
     @ApiOperation(value = "유저 게시물 조회")
     @GetMapping("/post")
-    public ResponseEntity<DataResponse<List<PostsResponseDto>>> readUserPost(@RequestAttribute("user") User user) {
+    public ResponseEntity<DataResponse<List<PostsResponseDto>>> readUserPost(@RequestAttribute User user) {
         return DataResponse.ok("유저 게시물 게시물 조회 성공", userService.findPostByUser(user));
     }
 }
