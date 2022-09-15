@@ -26,7 +26,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public void post(PostSubmitDto postSubmitDto, User user) {
+    public void submit(PostSubmitDto postSubmitDto, User user) {
         postRepository.save(postSubmitDto.toEntity(postSubmitDto, user));
     }
 

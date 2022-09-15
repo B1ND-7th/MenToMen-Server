@@ -1,7 +1,6 @@
 package project.bind.MenToMen.domain.post.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class PostsResponseDto {
 
     @ApiModelProperty(example = "기술 태그")
