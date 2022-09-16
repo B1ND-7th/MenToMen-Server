@@ -16,15 +16,6 @@ public class GlobalExceptionHandler {
         return ErrorResponseEntity.responseEntity(e.getErrorCode());
     }
 
-    @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
-    protected ErrorResponseEntity handleIndexException(Exception e){
-        return ErrorResponseEntity.builder()
-                .status(400)
-                .code("BAD REQUEST")
-                .message(e.getMessage())
-                .build();
-    }
-
     @ExceptionHandler(Exception.class)
     protected ErrorResponseEntity handleException(Exception e){
         log.error(e.toString());
