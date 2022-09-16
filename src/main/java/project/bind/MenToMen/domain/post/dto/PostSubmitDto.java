@@ -7,7 +7,6 @@ import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.user.domain.User;
 
-import java.time.LocalDateTime;
 
 @ApiModel
 @Getter
@@ -23,10 +22,9 @@ public class PostSubmitDto {
     public Post toEntity(PostSubmitDto postSubmitDto, User user) {
         return Post.builder()
                 .user(user)
-                .postDateTime(LocalDateTime.now())
                 .tag(postSubmitDto.getTag())
-                .imgUrl(postSubmitDto.getImgUrl())
                 .content(postSubmitDto.getContent())
+                .imgUrl(postSubmitDto.getImgUrl())
                 .build();
     }
 }

@@ -1,6 +1,8 @@
 package project.bind.MenToMen.domain.post.domain.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -11,13 +13,12 @@ import java.time.LocalDateTime;
 @Table(name = "post")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
+@EntityListeners(AuditingEntityListener.class)
 public class Post {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private Long Id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -28,12 +29,27 @@ public class Post {
     private Tag tag;
 
     @Column(nullable = false)
+    @CreatedDate
     private LocalDateTime postDateTime;
 
     private String imgUrl;
 
     @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
+
+/*
+    TODO: Comment 작업 완료시 진행
+    @OneToMany(mappedBy = "post")
+    private List<Comment> commentList;
+*/
+
+    @Builder
+    public Post(User user, Tag tag, String content, String imgUrl) {
+        this.user = user;
+        this.tag = tag;
+        this.content = content;
+        this.imgUrl = imgUrl;
+    }
 
     public void updateInfo(PostUpdateDto postUpdateDto) {
         this.tag = postUpdateDto.getTag();
