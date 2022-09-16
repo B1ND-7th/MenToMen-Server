@@ -47,5 +47,6 @@ cloud:
 product:
   client-id: ${CLIENT_ID}
   client-secret: ${CLIENT_SECRET}
-  redirect-url: ${REDIRECT_URL}
+  dauth: ${DAUTH_B1ND}
+  open-dodam: ${OPEN_DODAM_B1ND}
   jwt-secret-key: ${JWT_SECRET_KEY}

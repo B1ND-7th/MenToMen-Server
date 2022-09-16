@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.auth.dto.api.DAuthApiRequestDto;
 import project.bind.MenToMen.domain.auth.dto.req.DAuthClientRequestDto;
-import project.bind.MenToMen.domain.auth.dto.res.DAuthClientResponseDto;
 import project.bind.MenToMen.domain.auth.dto.res.TokenResponseDto;
 import project.bind.MenToMen.domain.auth.service.AuthService;
 import project.bind.MenToMen.domain.auth.dto.res.AccessTokenDto;
@@ -27,14 +26,6 @@ public class AuthController {
     private String clientId;
     @Value("${product.client-secret}")
     private String clientSecret;
-    @Value("${product.redirect-url}")
-    private String redirectUrl;
-
-    @ApiOperation(value = "DAuth Login url 받기")
-    @GetMapping("/url")
-    public DAuthClientResponseDto reqUrl(){
-        return authService.getLoginUrl(clientId, redirectUrl);
-    }
 
     @ApiOperation(value = "Token 받기", notes = "AccessToken 과 RefreshToken 을 얻는다.")
     @PostMapping("/code")
