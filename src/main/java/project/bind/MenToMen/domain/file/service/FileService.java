@@ -1,6 +1,7 @@
 package project.bind.MenToMen.domain.file.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,5 +47,10 @@ public class FileService {
             if(permit.equals(extension)) check = true;
         }
         if (check == false) throw CustomError.of(ErrorCode.WRONG_FILE);
+    }
+
+    public void delete(String imgUrl) {
+        String fileName = imgUrl.split("m/")[1];
+        s3Client.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
 }
