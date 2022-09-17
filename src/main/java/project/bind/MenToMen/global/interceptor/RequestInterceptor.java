@@ -49,7 +49,7 @@ public class RequestInterceptor implements HandlerInterceptor {
             request.setAttribute("user", user);
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw CustomError.of(ErrorCode.BAD_REQUEST);
+            throw CustomError.of(ErrorCode.TOKEN_NOT_PROVIDED);
         }
 
         return true;

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
     NOT_FOUND(HttpStatus.NOT_FOUND, "찾을 수 없습니다"),
-    BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청"),
+    WRONG_FILE(HttpStatus.BAD_REQUEST, "잘못된 파일 확장자"),
     WRONG_USER(HttpStatus.FORBIDDEN, "잘못된 사용자"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류"),
     INVALID_TOKEN(HttpStatus.FORBIDDEN, "유효하지 않은 토큰"),
