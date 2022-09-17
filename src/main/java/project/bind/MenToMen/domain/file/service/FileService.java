@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import project.bind.MenToMen.domain.file.dto.ImgUrlResponseDto;
+import project.bind.MenToMen.global.error.CustomError;
+import project.bind.MenToMen.global.error.ErrorCode;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -22,6 +24,8 @@ public class FileService {
 
     public ImgUrlResponseDto upload(MultipartFile file) throws IOException {
 
+        extensionCheck(file.getOriginalFilename().split("\\.")[1]);
+
         String s3FileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
 
         ObjectMetadata metadata = new ObjectMetadata();
@@ -31,5 +35,16 @@ public class FileService {
         s3Client.putObject(bucket, s3FileName, file.getInputStream(), metadata);
 
         return new ImgUrlResponseDto(s3Client.getUrl(bucket, s3FileName).toString());
+    }
+
+    public void extensionCheck(String extension) {
+
+        final String[] permitExtension = {"jpg", "jpeg", "png"};
+        boolean check = false;
+
+        for (String permit : permitExtension) {
+            if(permit.equals(extension)) check = true;
+        }
+        if (check == false) throw CustomError.of(ErrorCode.WRONG_FILE);
     }
 }
