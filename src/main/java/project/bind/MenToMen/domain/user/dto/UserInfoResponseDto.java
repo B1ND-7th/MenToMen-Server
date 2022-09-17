@@ -1,16 +1,13 @@
 package project.bind.MenToMen.domain.user.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import project.bind.MenToMen.domain.user.domain.Roles;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
 import project.bind.MenToMen.domain.user.domain.User;
 
 @Getter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class UserInfoResponseDto {
 
