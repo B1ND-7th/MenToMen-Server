@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
-import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.service.PostService;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -36,7 +35,7 @@ public class PostController {
 
     @ApiOperation(value = "전체 게시물 조회")
     @GetMapping("/read-all")
-    public ResponseEntity<DataResponse<List<PostsResponseDto>>> readAll() {
+    public ResponseEntity<DataResponse<List<PostResponseDto>>> readAll() {
         return DataResponse.ok("전체 게시물 조회 성공", postService.findPostAll());
     }
 
@@ -48,7 +47,7 @@ public class PostController {
 
     @ApiOperation(value = "태그로 게시물 조회")
     @GetMapping("/read-all/{tag}")
-    public ResponseEntity<DataResponse<List<PostsResponseDto>>> readAllByTag(@PathVariable("tag") Tag tag) {
+    public ResponseEntity<DataResponse<List<PostResponseDto>>> readAllByTag(@PathVariable("tag") Tag tag) {
         return DataResponse.ok("태그로 게시물 조회 성공", postService.findPostByTag(tag));
     }
 

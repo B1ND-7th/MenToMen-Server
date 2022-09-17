@@ -8,7 +8,6 @@ import project.bind.MenToMen.domain.post.domain.PostRepository;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
-import project.bind.MenToMen.domain.post.dto.PostsResponseDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -30,9 +29,9 @@ public class PostService {
         postRepository.save(postSubmitDto.toEntity(postSubmitDto, user));
     }
 
-    public List<PostsResponseDto> findPostAll() {
-        return postRepository.findAll(Sort.by(Sort.Direction.DESC, "Id")).stream()
-                .map(post -> new PostsResponseDto(post))
+    public List<PostResponseDto> findPostAll() {
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).stream()
+                .map(post -> new PostResponseDto(post))
                 .collect(Collectors.toList());
     }
 
@@ -43,9 +42,9 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    public List<PostsResponseDto> findPostByTag(Tag tag) {
-        return postRepository.findAllByTag(tag, Sort.by(Sort.Direction.DESC, "Id")).stream()
-                .map( post -> new PostsResponseDto(post))
+    public List<PostResponseDto> findPostByTag(Tag tag) {
+        return postRepository.findAllByTag(tag, Sort.by(Sort.Direction.DESC, "id")).stream()
+                .map( post -> new PostResponseDto(post))
                 .collect(Collectors.toList());
     }
 
