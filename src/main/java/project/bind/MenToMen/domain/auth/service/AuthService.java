@@ -54,10 +54,10 @@ public class AuthService {
         DAuthUserInfoResponseDto infoResponseDto = restTemplate.exchange(dodamOpenApiUrl, HttpMethod.GET, new HttpEntity<>(headers), DAuthUserInfoResponseDto.class).getBody();
         userService.save(infoResponseDto.getData().toEntity());
 
-        return getUserToken(infoResponseDto.getData());
+        return createUserToken(infoResponseDto.getData());
     }
 
-    public TokenResponseDto getUserToken(DAuthUserInfoDataResponseDto DAuthUserInfoDataResponseDto) {
+    private TokenResponseDto createUserToken(DAuthUserInfoDataResponseDto DAuthUserInfoDataResponseDto) {
         return TokenResponseDto.builder()
                 .accessToken(jwtUtil.generateAccessToken(DAuthUserInfoDataResponseDto.getEmail()))
                 .refreshToken(jwtUtil.generateRefreshToken(DAuthUserInfoDataResponseDto.getEmail()))

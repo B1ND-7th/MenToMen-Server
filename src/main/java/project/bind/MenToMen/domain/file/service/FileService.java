@@ -38,13 +38,16 @@ public class FileService {
         return new ImgUrlResponseDto(s3Client.getUrl(bucket, s3FileName).toString());
     }
 
-    public void extensionCheck(String extension) {
+    private void extensionCheck(String extension) {
 
         final String[] permitExtension = {"jpg", "jpeg", "png"};
         boolean check = false;
 
         for (String permit : permitExtension) {
-            if(permit.equals(extension)) check = true;
+            if(permit.equals(extension)) {
+                check = true;
+                break;
+            }
         }
         if (check == false) throw CustomError.of(ErrorCode.WRONG_FILE);
     }
