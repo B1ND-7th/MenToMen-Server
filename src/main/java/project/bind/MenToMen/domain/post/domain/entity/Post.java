@@ -2,6 +2,7 @@ package project.bind.MenToMen.domain.post.domain.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -32,14 +33,17 @@ public class Post {
     @CreatedDate
     private LocalDateTime createPostDateTime;
 
-    @Column(nullable = false)
-    @CreatedDate
+    @LastModifiedDate
     private LocalDateTime updatePostDateTime;
 
     private String imgUrl;
 
     @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UpdateStatus updateStatus;
 
 /*
     TODO: Comment 작업 완료시 진행
@@ -53,11 +57,13 @@ public class Post {
         this.tag = tag;
         this.content = content;
         this.imgUrl = imgUrl;
+        this.updateStatus = UpdateStatus.NOT_UPDATE;
     }
 
     public void updateInfo(PostUpdateDto postUpdateDto) {
         this.tag = postUpdateDto.getTag();
         this.content = postUpdateDto.getContent();
         this.imgUrl = postUpdateDto.getImgUrl();
+        this.updateStatus = UpdateStatus.UPDATE;
     }
 }

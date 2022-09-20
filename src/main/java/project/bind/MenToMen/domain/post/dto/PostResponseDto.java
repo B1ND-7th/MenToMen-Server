@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
+import project.bind.MenToMen.domain.post.domain.entity.UpdateStatus;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,9 @@ public class PostResponseDto {
 
     @ApiModelProperty(example = "기술 태그")
     private Tag tag;
-    private LocalDateTime localDateTime;
+    private LocalDateTime createDateTime;
+    private LocalDateTime updateDateTime;
+    private UpdateStatus updateStatus;
     @ApiModelProperty(example = "본문")
     private String content;
     private String imgUrl;
@@ -30,7 +33,9 @@ public class PostResponseDto {
 
     public PostResponseDto(Post post) {
         this.tag = post.getTag();
-        this.localDateTime = post.getPostDateTime();
+        this.createDateTime = post.getCreatePostDateTime();
+        this.updateDateTime = post.getCreatePostDateTime();
+        this.updateStatus = post.getUpdateStatus();
         this.content = post.getContent();
         this.imgUrl = post.getImgUrl();
         this.postId = post.getId();
