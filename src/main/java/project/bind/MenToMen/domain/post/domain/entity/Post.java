@@ -30,7 +30,11 @@ public class Post {
 
     @Column(nullable = false)
     @CreatedDate
-    private LocalDateTime postDateTime;
+    private LocalDateTime createPostDateTime;
+
+    @Column(nullable = false)
+    @CreatedDate
+    private LocalDateTime updatePostDateTime;
 
     private String imgUrl;
 
