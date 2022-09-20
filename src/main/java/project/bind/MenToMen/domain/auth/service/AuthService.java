@@ -15,6 +15,7 @@ import project.bind.MenToMen.global.config.jwt.JwtUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +54,9 @@ public class AuthService {
 
         DAuthUserInfoResponseDto infoResponseDto = restTemplate.exchange(dodamOpenApiUrl, HttpMethod.GET, new HttpEntity<>(headers), DAuthUserInfoResponseDto.class).getBody();
 
-        if(infoResponseDto.getData().getProfileImage().contains(".null")) infoResponseDto.getData().setProfileImgNull();
+        Optional.ofNullable(infoResponseDto.getData().getProfileImage()).ifPresent(
+            s -> { if (s.contains(".null")) infoResponseDto.getData().setProfileImgNull(); });
+
         userService.save(infoResponseDto.getData().toEntity());
 
         return createUserToken(infoResponseDto.getData());
