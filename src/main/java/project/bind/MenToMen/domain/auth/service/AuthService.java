@@ -52,6 +52,8 @@ public class AuthService {
         headers.add("Authorization","Bearer " + dto.getAccessToken());
 
         DAuthUserInfoResponseDto infoResponseDto = restTemplate.exchange(dodamOpenApiUrl, HttpMethod.GET, new HttpEntity<>(headers), DAuthUserInfoResponseDto.class).getBody();
+
+        if(infoResponseDto.getData().getProfileImage().contains(".null")) infoResponseDto.getData().setProfileImgNull();
         userService.save(infoResponseDto.getData().toEntity());
 
         return createUserToken(infoResponseDto.getData());

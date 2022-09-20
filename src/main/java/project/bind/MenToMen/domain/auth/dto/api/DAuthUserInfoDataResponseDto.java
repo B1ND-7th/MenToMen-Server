@@ -28,4 +28,8 @@ public class DAuthUserInfoDataResponseDto {
                 .roles(Roles.USER)
                 .build();
     }
+
+    public void setProfileImgNull() {
+        this.profileImage = null;
+    }
 }
