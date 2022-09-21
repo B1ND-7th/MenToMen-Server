@@ -25,7 +25,7 @@ public class FileService {
 
     public ImgUrlResponseDto upload(MultipartFile file) throws IOException {
 
-        extensionCheck(file.getOriginalFilename().split("\\.")[1]);
+        extensionCheck(file.getOriginalFilename());
 
         String s3FileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
 
@@ -38,13 +38,13 @@ public class FileService {
         return new ImgUrlResponseDto(s3Client.getUrl(bucket, s3FileName).toString());
     }
 
-    private void extensionCheck(String extension) {
+    private void extensionCheck(String imgUrl) {
 
-        final String[] permitExtension = {"jpg", "jpeg", "png"};
+        final String[] permitExtension = {".jpg", ".jpeg", ".png"};
         boolean check = false;
 
         for (String permit : permitExtension) {
-            if(permit.equals(extension)) {
+            if(imgUrl.contains(permit)) {
                 check = true;
                 break;
             }
