@@ -10,6 +10,8 @@ import project.bind.MenToMen.domain.auth.dto.res.AccessTokenDto;
 import project.bind.MenToMen.global.annotation.CheckToken;
 import project.bind.MenToMen.global.config.jwt.JwtUtil;
 import project.bind.MenToMen.global.config.jwt.TokenType;
+import project.bind.MenToMen.global.error.CustomError;
+import project.bind.MenToMen.global.error.ErrorCode;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,16 +36,21 @@ public class RequestInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        String token = getTokenOfRequest(request).split(" ")[1];
+        try {
+            String token = getTokenOfRequest(request).split(" ")[1];
 
-        TokenType tokenType = jwtUtil.checkTokenType(token);
-        User user = jwtUtil.getUserByToken(token);
+            TokenType tokenType = jwtUtil.checkTokenType(token);
+            User user = jwtUtil.getUserByToken(token);
 
-        if (checkTokenType(request, tokenType, user) == true) {
-            return true;
+            if (checkTokenType(request, tokenType, user) == true) {
+                return true;
+            }
+
+            request.setAttribute("user", user);
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw CustomError.of(ErrorCode.TOKEN_NOT_PROVIDED);
         }
-
-        request.setAttribute("user", user);
 
         return true;
     }

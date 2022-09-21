@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import project.bind.MenToMen.global.error.CustomError;
+import project.bind.MenToMen.global.error.ErrorCode;
 import project.bind.MenToMen.global.error.ErrorResponseEntity;
 
 @Slf4j
@@ -17,13 +18,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    protected ErrorResponseEntity handleException(Exception e){
+    protected ResponseEntity handleException(Exception e){
         log.error(e.toString());
-
-        return ErrorResponseEntity.builder()
+        return ResponseEntity
                 .status(500)
-                .code("INTERNAL_SERVER_ERROR")
-                .message("서버 오류")
-                .build();
+                .body(ErrorResponseEntity.builder()
+                        .status(ErrorCode.INTERNAL_SERVER_ERROR.getHttpStatus().value())
+                        .code(ErrorCode.INTERNAL_SERVER_ERROR.name())
+                        .message(e.getMessage())
+                        .build());
     }
 }
