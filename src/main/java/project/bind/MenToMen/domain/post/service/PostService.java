@@ -59,7 +59,9 @@ public class PostService {
                     if(user.getId().equals(postUser.getId())) {
                         post.updateInfo(postUpdateDto);
                         Optional.ofNullable(post.getImgUrl())
-                                .ifPresent(url -> fileService.delete(url));
+                                .ifPresent(url -> { if(!url.equals(postUpdateDto.getImgUrl()))
+                                    fileService.delete(url);
+                                });
                     } else throw CustomError.of(ErrorCode.WRONG_USER);
                 },
                 () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
