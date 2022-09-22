@@ -1,7 +1,10 @@
 package project.bind.MenToMen.domain.comment.domain.entities;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import project.bind.MenToMen.domain.post.domain.entities.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -16,7 +19,7 @@ public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -25,9 +28,23 @@ public class Comment {
     private Post post;
 
     @Column(nullable = false)
-    private LocalDateTime dateTime;
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @Column(nullable = false)
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
 
     @Column(nullable = false)
     private String content;
+
+    @Builder
+    public Comment(User user, Post post, LocalDateTime createdDate, LocalDateTime modifiedDate, String content) {
+        this.user = user;
+        this.post = post;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.content = content;
+    }
 
 }
