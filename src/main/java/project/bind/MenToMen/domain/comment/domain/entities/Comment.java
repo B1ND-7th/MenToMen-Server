@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import project.bind.MenToMen.domain.comment.domain.dto.CommentUpdateDto;
 import project.bind.MenToMen.domain.post.domain.entities.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -20,11 +21,11 @@ public class Comment {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "fk_post_id", nullable = false)
     private Post post;
 
     @Column(nullable = false)
@@ -35,16 +36,21 @@ public class Comment {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
 
     @Builder
     public Comment(User user, Post post, LocalDateTime createdDate, LocalDateTime modifiedDate, String content) {
         this.user = user;
         this.post = post;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+        this.createdDate = LocalDateTime.now();
+        this.modifiedDate = LocalDateTime.now();
         this.content = content;
+    }
+
+    public void update(CommentUpdateDto commentUpdateDto) {
+        this.modifiedDate = LocalDateTime.now();
+        this.content = commentUpdateDto.getContent();
     }
 
 }
