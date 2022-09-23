@@ -46,3 +46,4 @@ public class AuthController {
         return DataResponse.ok("토큰 생성 성공", accessTokenDto);
     }
 }
+
