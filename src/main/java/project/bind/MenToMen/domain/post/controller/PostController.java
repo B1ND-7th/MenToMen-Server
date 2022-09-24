@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
+import project.bind.MenToMen.domain.post.dto.PostSearchDto;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.service.PostService;
@@ -65,5 +66,11 @@ public class PostController {
     public ResponseEntity<Response> delete(@RequestAttribute User user, @PathVariable("postId")Long postId) {
         postService.delete(postId, user);
         return Response.ok("게시물 삭제 성공");
+    }
+
+    @ApiOperation(value = "게시물 키워드로 검색")
+    @PostMapping("/search")
+    public ResponseEntity<DataResponse<List<PostResponseDto>>> search(@RequestBody PostSearchDto postSearchDto) {
+        return DataResponse.ok("게시물 검색 성공", postService.search(postSearchDto));
     }
 }
