@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class CommentSubmitDto {
 
     @NotNull(message = "게시물 ID가 Null일 수 없습니다")
-    private Long post_id;
+    private Long postId;
 
     @NotBlank(message = "내용이 Null이거나 ' '일 수 없습니다")
     private String content;

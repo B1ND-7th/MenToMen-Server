@@ -22,9 +22,9 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/read-all/{postId}")
+    @GetMapping("/read/{postId}")
     public ResponseEntity<DataResponse<List<CommentResponseDto>>> getComment(final @PathVariable Long postId) {
-        return DataResponse.ok("게시물 댓글 정보 조회 성공", commentService.findCommentAll(postId));
+        return DataResponse.ok("게시물 댓글 정보 조회 성공", commentService.findAllComment(postId));
     }
 
     @CheckToken
@@ -39,7 +39,7 @@ public class CommentController {
 
     @CheckToken
     @PatchMapping("/update")
-    public ResponseEntity<Response> patchComment(
+    public ResponseEntity<Response> modifyComment(
             final @RequestAttribute User user,
             final @Valid @RequestBody CommentUpdateDto commentUpdateDto
     ) {
@@ -53,7 +53,7 @@ public class CommentController {
             final @RequestAttribute User user,
             final @PathVariable Long id
     ) {
-        commentService.deleteById(id);
+        commentService.deleteById(user, id);
         return Response.ok("댓글 삭제 성공");
     }
 
