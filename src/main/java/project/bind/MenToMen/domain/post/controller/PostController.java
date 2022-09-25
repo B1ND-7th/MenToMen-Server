@@ -66,4 +66,5 @@ public class PostController {
         postService.delete(postId, user);
         return Response.ok("게시물 삭제 성공");
     }
+
 }
