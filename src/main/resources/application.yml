@@ -51,3 +51,4 @@ product:
   dauth: ${DAUTH_B1ND}
   open-dodam: ${OPEN_DODAM_B1ND}
   jwt-secret-key: ${JWT_SECRET_KEY}
+
