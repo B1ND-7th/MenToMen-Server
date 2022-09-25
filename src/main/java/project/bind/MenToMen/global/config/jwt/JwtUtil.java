@@ -74,7 +74,7 @@ public class JwtUtil {
     }
 
     public TokenType checkTokenType(String token) {
-        if ("RefreshToken".equals(extractAllClaims(token).get("type"))) {
+        if ("REFRESHTOKEN".equals(extractAllClaims(token).get("type"))) {
             return TokenType.REFRESHTOKEN;
         } else {
             return TokenType.ACCESSTOKEN;

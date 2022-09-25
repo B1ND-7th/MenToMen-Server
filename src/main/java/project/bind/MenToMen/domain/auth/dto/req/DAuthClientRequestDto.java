@@ -1,13 +1,11 @@
 package project.bind.MenToMen.domain.auth.dto.req;
 
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class DAuthClientRequestDto {
 
+    @ApiModelProperty(example = "코드")
     private String code;
 }

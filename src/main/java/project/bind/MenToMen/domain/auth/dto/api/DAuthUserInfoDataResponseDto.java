@@ -10,7 +10,7 @@ import project.bind.MenToMen.domain.user.domain.User;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserInfoDataResponseDto {
+public class DAuthUserInfoDataResponseDto {
 
     private int grade;
     private int room;
@@ -27,5 +27,9 @@ public class UserInfoDataResponseDto {
                 .stdInfo(new StdInfo(grade, room, number))
                 .roles(Roles.USER)
                 .build();
+    }
+
+    public void setProfileImgNull() {
+        this.profileImage = null;
     }
 }
