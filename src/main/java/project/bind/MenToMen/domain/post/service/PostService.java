@@ -8,6 +8,7 @@ import project.bind.MenToMen.domain.file.service.FileService;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.dto.PostResponseDto;
+import project.bind.MenToMen.domain.post.dto.PostSearchDto;
 import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
@@ -59,7 +60,9 @@ public class PostService {
                     if(user.getId().equals(postUser.getId())) {
                         post.updateInfo(postUpdateDto);
                         Optional.ofNullable(post.getImgUrl())
-                                .ifPresent(url -> fileService.delete(url));
+                                .ifPresent(url -> { if(!url.equals(postUpdateDto.getImgUrl()))
+                                    fileService.delete(url);
+                                });
                     } else throw CustomError.of(ErrorCode.WRONG_USER);
                 },
                 () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
@@ -77,5 +80,10 @@ public class PostService {
                     } else throw CustomError.of(ErrorCode.WRONG_USER);
                 },
                 () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
+    }
+
+    public List<PostResponseDto> search(PostSearchDto postSearchDto) {
+        return postRepository.findByContentContaining(postSearchDto.getKeyword()).stream()
+                .map(post -> new PostResponseDto(post)).collect(Collectors.toList());
     }
 }

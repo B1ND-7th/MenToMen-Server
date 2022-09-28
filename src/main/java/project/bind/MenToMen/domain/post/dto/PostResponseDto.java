@@ -34,7 +34,7 @@ public class PostResponseDto {
     public PostResponseDto(Post post) {
         this.tag = post.getTag();
         this.createDateTime = post.getCreatePostDateTime();
-        this.updateDateTime = post.getCreatePostDateTime();
+        this.updateDateTime = post.getUpdatePostDateTime();
         this.updateStatus = post.getUpdateStatus();
         this.content = post.getContent();
         this.imgUrl = post.getImgUrl();
