@@ -1,8 +1,8 @@
 package project.bind.MenToMen.domain.comment.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import project.bind.MenToMen.domain.comment.domain.entity.Comment;
-import project.bind.MenToMen.domain.post.domain.entity.Post;
+import project.bind.MenToMen.domain.comment.domain.entities.Comment;
+import project.bind.MenToMen.domain.post.domain.entities.Post;
 
 import java.util.List;
 

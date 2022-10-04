@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
-import project.bind.MenToMen.domain.post.domain.dto.PostResponseDto;
+import project.bind.MenToMen.domain.post.dto.PostResponseDto;
 import project.bind.MenToMen.domain.user.domain.User;
 import project.bind.MenToMen.domain.user.domain.UserRepository;
 import project.bind.MenToMen.global.error.CustomError;
@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public List<PostResponseDto> findPostByUser(User user) {
-        return userRepository.findById(user.getId()).get().getPostList()
+        return userRepository.findById(user.getId()).get().getPosts()
                 .stream().sorted(Comparator.comparing(Post::getId).reversed())
                 .map(post -> new PostResponseDto(post)).collect(Collectors.toList());
     }

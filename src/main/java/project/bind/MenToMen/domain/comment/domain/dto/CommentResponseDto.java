@@ -2,7 +2,7 @@ package project.bind.MenToMen.domain.comment.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import project.bind.MenToMen.domain.comment.domain.entity.Comment;
+import project.bind.MenToMen.domain.comment.domain.entities.Comment;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
 
 import java.time.LocalDateTime;

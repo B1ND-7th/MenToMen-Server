@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.user.domain.dto;
+package project.bind.MenToMen.domain.user.dto;
 
 import lombok.*;
 import project.bind.MenToMen.domain.user.domain.Roles;

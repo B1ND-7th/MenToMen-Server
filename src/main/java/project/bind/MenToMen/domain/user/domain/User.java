@@ -35,5 +35,5 @@ public class User {
     private Roles roles;
 
     @OneToMany(mappedBy = "user")
-    private List<Post> postList = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 }

@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.post.domain.dto;
+package project.bind.MenToMen.domain.post.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,7 +1,6 @@
 package project.bind.MenToMen.global.interceptor;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class RequestInterceptor implements HandlerInterceptor {

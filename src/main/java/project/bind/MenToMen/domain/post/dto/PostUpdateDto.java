@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.post.domain.dto;
+package project.bind.MenToMen.domain.post.dto;
 
 import lombok.Getter;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
