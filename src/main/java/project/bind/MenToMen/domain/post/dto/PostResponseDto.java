@@ -11,6 +11,8 @@ import project.bind.MenToMen.domain.post.domain.entity.UpdateStatus;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,7 +26,7 @@ public class PostResponseDto {
     private UpdateStatus updateStatus;
     @ApiModelProperty(example = "본문")
     private String content;
-    private String imgUrl;
+    private List<String> imgUrls;
     private Long postId;
     private String userName;
     private String profileUrl;
@@ -37,7 +39,7 @@ public class PostResponseDto {
         this.updateDateTime = post.getUpdatePostDateTime();
         this.updateStatus = post.getUpdateStatus();
         this.content = post.getContent();
-        this.imgUrl = post.getImgUrl();
+        this.imgUrls = List.of(post.getImgUrl().split("///"));
         this.postId = post.getId();
         this.userName = post.getUser().getName();
         this.profileUrl = post.getUser().getProfileImage();

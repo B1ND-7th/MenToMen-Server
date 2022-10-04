@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.bind.MenToMen.domain.file.dto.ImgUrlResponseDto;
 import project.bind.MenToMen.domain.file.service.FileService;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
@@ -58,11 +59,9 @@ public class PostService {
                 post -> {
                     User postUser = post.getUser();
                     if(user.getId().equals(postUser.getId())) {
-                        post.updateInfo(postUpdateDto);
                         Optional.ofNullable(post.getImgUrl())
-                                .ifPresent(url -> { if(!url.equals(postUpdateDto.getImgUrl()))
-                                    fileService.delete(url);
-                                });
+                                .ifPresent(url -> fileService.update(postUpdateDto.getImgUrls(), url));
+                        post.updateInfo(postUpdateDto);
                     } else throw CustomError.of(ErrorCode.WRONG_USER);
                 },
                 () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
@@ -76,7 +75,11 @@ public class PostService {
                     if(user.getId().equals(postUser.getId())) {
                         postRepository.delete(post);
                         Optional.ofNullable(post.getImgUrl())
-                                .ifPresent(url -> fileService.delete(url));
+                                .ifPresent(urls -> {
+                                    for (String url : List.of(urls.split("///")).stream().toList()) {
+                                        fileService.delete(url);
+                                    }
+                                });
                     } else throw CustomError.of(ErrorCode.WRONG_USER);
                 },
                 () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});

@@ -67,8 +67,6 @@ public class FileService {
 
         List<String> updateFileNameList = updateUrls.stream().map(imgUrlResponseDto -> imgUrlResponseDto.getImgUrl().split("m/")[1]).collect(Collectors.toList());
         List<String> originalFileNameList = List.of(originalUrls.split("///")).stream().map(url -> url.split("m/")[1]).collect(Collectors.toList());
-//        List<String> originalUrlList = List.of(originalUrls.split("///"));
-//        List<String> originalFileNameList = originalUrlList.stream().map(url -> url.split("m/")[1]).collect(Collectors.toList());
 
         for (String originalFileName : originalFileNameList) {
             boolean checkUrl = false;
@@ -78,13 +76,15 @@ public class FileService {
                     break;
                 }
             }
-            if (checkUrl == false) s3Client.deleteObject(new DeleteObjectRequest(bucket, originalFileName));
+            if (checkUrl == false) {
+                System.out.println("delete");
+                s3Client.deleteObject(new DeleteObjectRequest(bucket, originalFileName));
+            }
         }
     }
 
     public void delete(String imgUrl) {
         String fileName = imgUrl.split("m/")[1];
-        System.out.println(fileName);
         s3Client.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
 }
