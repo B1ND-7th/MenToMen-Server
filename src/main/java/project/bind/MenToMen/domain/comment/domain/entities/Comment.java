@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import project.bind.MenToMen.domain.comment.domain.dto.CommentUpdateDto;
-import project.bind.MenToMen.domain.post.domain.entities.Post;
+import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 
 import javax.persistence.*;

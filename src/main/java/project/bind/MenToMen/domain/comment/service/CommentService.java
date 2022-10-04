@@ -10,7 +10,7 @@ import project.bind.MenToMen.domain.comment.domain.dto.CommentSubmitDto;
 import project.bind.MenToMen.domain.comment.domain.dto.CommentUpdateDto;
 import project.bind.MenToMen.domain.comment.domain.entities.Comment;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
-import project.bind.MenToMen.domain.post.domain.entities.Post;
+import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 import project.bind.MenToMen.global.error.CustomError;
 import project.bind.MenToMen.global.error.ErrorCode;
