@@ -10,6 +10,7 @@ import project.bind.MenToMen.domain.file.service.FileService;
 import project.bind.MenToMen.global.response.DataResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @Api(tags = "File-Controller")
 @RestController
@@ -21,7 +22,7 @@ public class FileController {
 
     @ApiOperation(value = "이미지 업로드 후 Url 받기", notes = "Form-data 형식 MultipartFile 업로드")
     @PostMapping("/upload")
-    public ResponseEntity<DataResponse<ImgUrlResponseDto>> upload(@RequestPart MultipartFile file) throws IOException {
+    public ResponseEntity<DataResponse<List<ImgUrlResponseDto>>> upload(@RequestPart List<MultipartFile> file) throws IOException {
         return DataResponse.ok("파일 업로드 성공", fileService.upload(file));
     }
 }

@@ -24,8 +24,8 @@ public class JwtUtil {
     @Value("${product.jwt-secret-key}")
     private String SECRET_KEY;
 
-    private static final Long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 1800; // 30분
-    private static final Long REFRESH_TOKEN_EXPIRE_TIME = 1000L * 3600 * 24; // 24시간
+    private static final Long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 3600 * 24; // 24시간
+    private static final Long REFRESH_TOKEN_EXPIRE_TIME = 1000L * 3600 * 24 * 3; // 3일
 
     private Key getSignKey(String secretKey) {
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);

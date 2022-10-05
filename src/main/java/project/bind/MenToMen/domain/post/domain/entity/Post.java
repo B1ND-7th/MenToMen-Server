@@ -9,6 +9,7 @@ import project.bind.MenToMen.domain.user.domain.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "post")
@@ -36,6 +37,7 @@ public class Post {
     @LastModifiedDate
     private LocalDateTime updatePostDateTime;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String imgUrl;
 
     @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
@@ -57,7 +59,8 @@ public class Post {
     public void updateInfo(PostUpdateDto postUpdateDto) {
         this.tag = postUpdateDto.getTag();
         this.content = postUpdateDto.getContent();
-        this.imgUrl = postUpdateDto.getImgUrl();
+        this.imgUrl = String.join("///", postUpdateDto.getImgUrls().stream().map(
+                imgUrlResponseDto -> imgUrlResponseDto.getImgUrl()).collect(Collectors.toList()));
         this.updateStatus = UpdateStatus.UPDATE;
     }
 }
