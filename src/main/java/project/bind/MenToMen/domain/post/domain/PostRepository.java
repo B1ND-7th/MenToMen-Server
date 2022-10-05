@@ -22,5 +22,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p join fetch p.user u where p.tag=:tag")
     List<Post> findAllByTag(Tag tag, Sort sort);
 
-    List<Post> findByContentContaining(String keyword);
 }
