@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.bind.MenToMen.domain.post.dto.PostResponseDto;
+import project.bind.MenToMen.domain.post.domain.dto.PostResponseDto;
 import project.bind.MenToMen.domain.user.domain.User;
 import project.bind.MenToMen.domain.user.dto.UserInfoResponseDto;
 import project.bind.MenToMen.domain.user.service.UserService;

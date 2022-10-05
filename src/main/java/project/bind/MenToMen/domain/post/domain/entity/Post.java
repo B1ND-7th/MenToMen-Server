@@ -4,7 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import project.bind.MenToMen.domain.post.dto.PostUpdateDto;
+import project.bind.MenToMen.domain.post.domain.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.user.domain.User;
 
 import javax.persistence.*;
@@ -18,11 +18,11 @@ import java.time.LocalDateTime;
 public class Post {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
+    @Column(name = "fk_post_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
 
     @Column(nullable = false)
@@ -44,12 +44,6 @@ public class Post {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UpdateStatus updateStatus;
-
-/*
-    TODO: Comment 작업 완료시 진행
-    @OneToMany(mappedBy = "post")
-    private List<Comment> commentList;
-*/
 
     @Builder
     public Post(User user, Tag tag, String content, String imgUrl) {
