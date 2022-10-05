@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Getter
 public class PostSubmitDto {
 
-    @ApiModelProperty(example = "받은 이미지 Url")
     private List<ImgUrlResponseDto> imgUrls;
     @ApiModelProperty(example = "태그")
     private Tag tag;
