@@ -38,6 +38,7 @@ public class PostResponseDto {
         this.updateDateTime = post.getUpdatePostDateTime();
         this.updateStatus = post.getUpdateStatus();
         this.content = post.getContent();
+        if(post.getImgUrl() != null)
         this.imgUrls = List.of(post.getImgUrl().split("///"));
         this.postId = post.getId();
         this.userName = post.getUser().getName();
