@@ -42,5 +42,6 @@ public class AuthController {
     public ResponseEntity<DataResponse<AccessTokenDto>> getAccessToken(@RequestAttribute("accessToken") AccessTokenDto accessTokenDto) {
         return DataResponse.ok("토큰 생성 성공", accessTokenDto);
     }
+
 }
 

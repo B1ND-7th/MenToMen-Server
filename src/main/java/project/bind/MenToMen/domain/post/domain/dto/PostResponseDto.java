@@ -1,4 +1,4 @@
-package project.bind.MenToMen.domain.post.dto;
+package project.bind.MenToMen.domain.post.domain.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -11,7 +11,6 @@ import project.bind.MenToMen.domain.post.domain.entity.UpdateStatus;
 import project.bind.MenToMen.domain.user.domain.StdInfo;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -36,7 +35,7 @@ public class PostResponseDto {
     public PostResponseDto(Post post) {
         this.tag = post.getTag();
         this.createDateTime = post.getCreatePostDateTime();
-        this.updateDateTime = post.getCreatePostDateTime();
+        this.updateDateTime = post.getUpdatePostDateTime();
         this.updateStatus = post.getUpdateStatus();
         this.content = post.getContent();
         this.imgUrls = List.of(post.getImgUrl().split("///"));

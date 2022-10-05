@@ -1,10 +1,11 @@
-package project.bind.MenToMen.domain.comment.domain.entities;
+package project.bind.MenToMen.domain.comment.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import project.bind.MenToMen.domain.comment.domain.dto.CommentUpdateDto;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Entity(name = "comment")
 @Getter
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Comment {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,16 +42,13 @@ public class Comment {
     private String content;
 
     @Builder
-    public Comment(User user, Post post, LocalDateTime createdDate, LocalDateTime modifiedDate, String content) {
+    public Comment(User user, Post post, String content) {
         this.user = user;
         this.post = post;
-        this.createdDate = LocalDateTime.now();
-        this.modifiedDate = LocalDateTime.now();
         this.content = content;
     }
 
     public void update(CommentUpdateDto commentUpdateDto) {
-        this.modifiedDate = LocalDateTime.now();
         this.content = commentUpdateDto.getContent();
     }
 
