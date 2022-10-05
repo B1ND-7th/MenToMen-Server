@@ -75,7 +75,7 @@ public class PostService {
                         postRepository.delete(post);
                         Optional.ofNullable(post.getImgUrl())
                                 .ifPresent(urls -> {
-                                    for (String url : List.of(urls.split("///")).stream().toList()) {
+                                    for (String url : List.of(urls.split("///")).stream().collect(Collectors.toList())) {
                                         fileService.delete(url);
                                     }
                                 });
