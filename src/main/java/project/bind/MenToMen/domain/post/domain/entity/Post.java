@@ -58,7 +58,8 @@ public class Post {
         this.user = user;
         this.tag = tag;
         this.content = content;
-        this.imgUrl = imgUrl;
+        if(imgUrl.isEmpty()) this.imgUrl = null;
+        else this.imgUrl = imgUrl;
         this.updateStatus = UpdateStatus.NOT_UPDATE;
     }
 
