@@ -2,7 +2,7 @@ package project.bind.MenToMen.domain.comment.domain.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import project.bind.MenToMen.domain.comment.domain.entities.Comment;
+import project.bind.MenToMen.domain.comment.domain.entity.Comment;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 
