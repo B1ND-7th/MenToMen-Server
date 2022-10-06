@@ -84,8 +84,8 @@ public class PostService {
                 () -> { throw CustomError.of(ErrorCode.NOT_FOUND);});
     }
 
-    public List<PostResponseDto> search(PostSearchDto postSearchDto) {
-        return postRepository.findByContentContaining(postSearchDto.getKeyword()).stream()
+    public List<PostResponseDto> search(String keyWord) {
+        return postRepository.findByContentContaining(keyWord).stream()
                 .map(post -> new PostResponseDto(post)).collect(Collectors.toList());
     }
 }

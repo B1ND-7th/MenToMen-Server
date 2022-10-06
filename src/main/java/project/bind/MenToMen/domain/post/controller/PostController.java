@@ -69,9 +69,8 @@ public class PostController {
     }
 
     @ApiOperation(value = "게시물 키워드로 검색")
-    @PostMapping("/search")
-    public ResponseEntity<DataResponse<List<PostResponseDto>>> search(@RequestBody PostSearchDto postSearchDto) {
-        return DataResponse.ok("게시물 검색 성공", postService.search(postSearchDto));
+    @GetMapping("/search/{keyWord}")
+    public ResponseEntity<DataResponse<List<PostResponseDto>>> search(@PathVariable("keyWord")String keyWord) {
+        return DataResponse.ok("게시물 검색 성공", postService.search(keyWord));
     }
-
 }
