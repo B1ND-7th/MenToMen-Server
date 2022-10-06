@@ -22,7 +22,7 @@ public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
 
@@ -41,15 +41,20 @@ public class Comment {
     @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private UpdateStatus updateStatus;
+
     @Builder
-    public Comment(User user, Post post, String content) {
+    public Comment(User user, Post post, String content, UpdateStatus updateStatus) {
         this.user = user;
         this.post = post;
         this.content = content;
+        this.updateStatus = UpdateStatus.NOT_UPDATE;
     }
 
     public void update(CommentUpdateDto commentUpdateDto) {
         this.content = commentUpdateDto.getContent();
+        this.updateStatus = UpdateStatus.UPDATE;
     }
 
 }
