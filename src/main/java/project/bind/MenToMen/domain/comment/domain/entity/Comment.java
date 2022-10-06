@@ -42,6 +42,7 @@ public class Comment {
     private String content;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UpdateStatus updateStatus;
 
     @Builder
