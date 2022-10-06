@@ -25,6 +25,8 @@ spring:
 logging:
   file:
     path: ${FILE_PATH}
+    max-size: 500MB
+    max-history: 30
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
