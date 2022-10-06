@@ -33,6 +33,6 @@ public class UserController {
     @ApiOperation(value = "유저 게시물 조회")
     @GetMapping("/post")
     public ResponseEntity<DataResponse<List<PostResponseDto>>> readUserPost(@RequestAttribute User user) {
-        return DataResponse.ok("유저 게시물 게시물 조회 성공", userService.findPostByUser(user));
+        return DataResponse.ok("유저 게시물 조회 성공", userService.findPostByUser(user));
     }
 }

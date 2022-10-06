@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;
 import project.bind.MenToMen.domain.post.domain.dto.PostResponseDto;
-import project.bind.MenToMen.domain.post.domain.dto.PostSearchDto;
 import project.bind.MenToMen.domain.post.domain.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.domain.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.service.PostService;

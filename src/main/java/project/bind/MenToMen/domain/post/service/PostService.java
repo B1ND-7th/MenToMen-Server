@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.file.service.FileService;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
 import project.bind.MenToMen.domain.post.domain.dto.PostResponseDto;
-import project.bind.MenToMen.domain.post.domain.dto.PostSearchDto;
 import project.bind.MenToMen.domain.post.domain.dto.PostSubmitDto;
 import project.bind.MenToMen.domain.post.domain.dto.PostUpdateDto;
 import project.bind.MenToMen.domain.post.domain.entity.Tag;

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class Post {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fk_post_id")
+    @Column(name = "post_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
