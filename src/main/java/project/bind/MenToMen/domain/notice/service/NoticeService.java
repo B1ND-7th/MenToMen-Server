@@ -25,6 +25,7 @@ public class NoticeService {
 
     private final NoticeRepository noticeRepository;
 
+    @Transactional
     public List<NoticeResponseDto> findAllNotice(User user) {
         List<Notice> notices = noticeRepository.findAllByWriterUser(user, Sort.by(Sort.Direction.DESC, "id"));
         List<NoticeResponseDto> noticeResponseDtos = notices.stream()
