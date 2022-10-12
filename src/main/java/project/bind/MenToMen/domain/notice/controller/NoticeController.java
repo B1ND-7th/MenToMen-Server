@@ -22,7 +22,7 @@ public class NoticeController {
 
     @CheckToken
     @ApiOperation(value = "알림 여부 존재하면 EXIST 없으면 NONE")
-    @GetMapping("/")
+    @GetMapping("/check")
     public ResponseEntity<DataResponse<NoticeStatusDto>> getNoticeStatus(@RequestAttribute User user) {
         return DataResponse.ok("알림 여부 조회 성공", noticeService.getNoticeStatus(user));
     }
