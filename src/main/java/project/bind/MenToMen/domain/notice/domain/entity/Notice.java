@@ -57,4 +57,7 @@ public class Notice {
         this.noticeStatus = NoticeStatus.EXIST;
     }
 
+    public void updateNoticeStatus() {
+        this.noticeStatus = NoticeStatus.NONE;
+    }
 }

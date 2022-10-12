@@ -9,6 +9,7 @@ import project.bind.MenToMen.domain.comment.domain.entity.Comment;
 import project.bind.MenToMen.domain.notice.domain.NoticeRepository;
 import project.bind.MenToMen.domain.notice.domain.dto.NoticeResponseDto;
 import project.bind.MenToMen.domain.notice.domain.dto.NoticeStatus;
+import project.bind.MenToMen.domain.notice.domain.dto.NoticeStatusDto;
 import project.bind.MenToMen.domain.notice.domain.entity.Notice;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -25,9 +26,19 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     public List<NoticeResponseDto> findAllNotice(User user) {
-         return noticeRepository.findAllByWriterUser(user, Sort.by(Sort.Direction.DESC, "id")).stream()
-                 .map(notice -> new NoticeResponseDto(notice))
-                 .collect(Collectors.toList());
+        List<Notice> notices = noticeRepository.findAllByWriterUser(user, Sort.by(Sort.Direction.DESC, "id"));
+        List<NoticeResponseDto> noticeResponseDtos = notices.stream()
+                .map(notice -> new NoticeResponseDto(notice))
+                .collect(Collectors.toList());
+        updateNoticeStatus(notices);
+        return noticeResponseDtos;
+    }
+
+    @Transactional
+    protected void updateNoticeStatus(List<Notice> notices) {
+        for (Notice notice : notices) {
+            notice.updateNoticeStatus();
+        }
     }
 
     @Transactional
@@ -38,5 +49,12 @@ public class NoticeService {
                 .comment(comment)
                 .writerUser(post.getUser()).build();
         noticeRepository.save(notice);
+    }
+
+    public NoticeStatusDto getNoticeStatus(User user) {
+        List<Notice> noticeList = noticeRepository.findAllByWriterUser(user, Sort.by(Sort.Direction.DESC, "id"));
+        for (Notice notice : noticeList) {
+            if(notice.getNoticeStatus().equals(NoticeStatus.EXIST)) return new NoticeStatusDto(NoticeStatus.EXIST);
+        } return new NoticeStatusDto(NoticeStatus.NONE);
     }
 }
