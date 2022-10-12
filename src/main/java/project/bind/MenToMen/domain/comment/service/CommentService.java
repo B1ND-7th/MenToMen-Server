@@ -41,8 +41,8 @@ public class CommentService {
     public void save(User user, CommentSubmitDto commentSubmitDto) {
         Post post = postRepository.findById(commentSubmitDto.getPostId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
-        commentRepository.save(commentSubmitDto.toEntity(user, post, commentSubmitDto));
-        noticeService.submitNotice(user, post);
+        Comment comment = commentRepository.save(commentSubmitDto.toEntity(user, post, commentSubmitDto));
+        noticeService.submitNotice(user, post, comment);
     }
 
     @Transactional

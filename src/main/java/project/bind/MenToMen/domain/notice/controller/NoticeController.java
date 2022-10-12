@@ -1,6 +1,6 @@
 package project.bind.MenToMen.domain.notice.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.bind.MenToMen.domain.notice.domain.dto.NoticeResponseDto;
@@ -14,20 +14,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notice")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NoticeController {
 
     private final NoticeService noticeService;
 
-    @CheckToken
-    @GetMapping("/")
-    public ResponseEntity<DataResponse<NoticeStatus>> getNoticeStatus(@RequestAttribute User user) {
-        noticeService.noticeStatus(user);
-    }
+//    @CheckToken
+//    @GetMapping("/")
+//    public ResponseEntity<DataResponse<NoticeStatus>> getNoticeStatus(@RequestAttribute User user) {
+//        noticeService.noticeStatus(user);
+//    }
 
-    @RequestMapping("/list/{userId}")
-    public ResponseEntity<DataResponse<List<NoticeResponseDto>>> getAlarmList(@PathVariable Long userId) {
-        return DataResponse.ok("알림 정보 조회 성공", noticeService.findAllNotice);
+    @CheckToken
+    @RequestMapping("/list")
+    public ResponseEntity<DataResponse<List<NoticeResponseDto>>> getNoticeList(@RequestAttribute User user) {
+        return DataResponse.ok("알림 정보 조회 성공", noticeService.findAllNotice(user));
     }
 
 }
