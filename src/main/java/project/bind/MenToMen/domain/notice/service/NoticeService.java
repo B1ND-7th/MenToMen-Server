@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.bind.MenToMen.domain.comment.domain.entity.Comment;
 import project.bind.MenToMen.domain.notice.domain.NoticeRepository;
 import project.bind.MenToMen.domain.notice.domain.dto.NoticeResponseDto;
-import project.bind.MenToMen.domain.notice.domain.dto.NoticeStatus;
+import project.bind.MenToMen.domain.notice.domain.entity.NoticeStatus;
 import project.bind.MenToMen.domain.notice.domain.dto.NoticeStatusDto;
 import project.bind.MenToMen.domain.notice.domain.entity.Notice;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Transactional(readOnly = false)
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class NoticeService {
 

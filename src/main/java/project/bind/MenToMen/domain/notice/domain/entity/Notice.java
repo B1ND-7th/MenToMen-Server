@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import project.bind.MenToMen.domain.comment.domain.entity.Comment;
-import project.bind.MenToMen.domain.notice.domain.dto.NoticeStatus;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -37,7 +36,7 @@ public class Notice {
     private Post post;
 
     @JoinColumn(name = "fk_comment_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Comment comment;
 
     @CreatedDate
