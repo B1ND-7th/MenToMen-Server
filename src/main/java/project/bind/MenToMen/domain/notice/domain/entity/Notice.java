@@ -20,13 +20,9 @@ public class Notice {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "fk_sender_user_id", nullable = false)
+    @JoinColumn(name = "fk_user_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private User sendUser;
-
-    @JoinColumn(name = "fk_writer_user_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User writerUser;
 
     @JoinColumn(name = "fk_post_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,9 +33,8 @@ public class Notice {
     private LocalDateTime createdDate;
 
     @Builder
-    public Notice(User sendUser, User writerUser, Post post) {
+    public Notice(User sendUser, Post post) {
         this.sendUser = sendUser;
-        this.writerUser = writerUser;
         this.post = post;
     }
 

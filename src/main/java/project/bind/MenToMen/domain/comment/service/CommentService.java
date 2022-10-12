@@ -9,6 +9,7 @@ import project.bind.MenToMen.domain.comment.domain.dto.CommentResponseDto;
 import project.bind.MenToMen.domain.comment.domain.dto.CommentSubmitDto;
 import project.bind.MenToMen.domain.comment.domain.dto.CommentUpdateDto;
 import project.bind.MenToMen.domain.comment.domain.entity.Comment;
+import project.bind.MenToMen.domain.notice.service.NoticeService;
 import project.bind.MenToMen.domain.post.domain.PostRepository;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
@@ -25,6 +26,7 @@ public class CommentService {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final NoticeService noticeService;
 
     @Transactional(readOnly = true)
     public List<CommentResponseDto> findAllComment(final Long id) {
@@ -40,6 +42,7 @@ public class CommentService {
         Post post = postRepository.findById(commentSubmitDto.getPostId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
         commentRepository.save(commentSubmitDto.toEntity(user, post, commentSubmitDto));
+        noticeService.submitNotice(user, post);
     }
 
     @Transactional
