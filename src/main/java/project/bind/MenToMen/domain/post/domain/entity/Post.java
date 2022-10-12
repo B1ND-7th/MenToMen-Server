@@ -66,7 +66,8 @@ public class Post {
     public void updateInfo(PostUpdateDto postUpdateDto) {
         this.tag = postUpdateDto.getTag();
         this.content = postUpdateDto.getContent();
-        this.imgUrl = String.join("///", postUpdateDto.getImgUrls().stream().map(
+        if(postUpdateDto.getImgUrls().isEmpty()) this.imgUrl = null;
+        else this.imgUrl = String.join("///", postUpdateDto.getImgUrls().stream().map(
                 imgUrlResponseDto -> imgUrlResponseDto.getImgUrl()).collect(Collectors.toList()));
         this.updateStatus = UpdateStatus.UPDATE;
     }

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import project.bind.MenToMen.domain.comment.domain.dto.CommentUpdateDto;
+import project.bind.MenToMen.domain.notice.domain.entity.Notice;
 import project.bind.MenToMen.domain.post.domain.entity.Post;
 import project.bind.MenToMen.domain.user.domain.User;
 
@@ -45,6 +46,9 @@ public class Comment {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UpdateStatus updateStatus;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "comment", cascade = CascadeType.ALL)
+    private Notice notice;
 
     @Builder
     public Comment(User user, Post post, String content, UpdateStatus updateStatus) {
