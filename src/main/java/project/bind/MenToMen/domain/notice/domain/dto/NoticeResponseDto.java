@@ -16,6 +16,7 @@ public class NoticeResponseDto {
     private String senderProfileImage;
     private String commentContent;
     private LocalDateTime createDateTime;
+    private NoticeStatus noticeStatus;
 
     public NoticeResponseDto(Notice notice) {
         this.postId = notice.getPost().getId();
@@ -23,5 +24,6 @@ public class NoticeResponseDto {
         this.senderProfileImage = notice.getSendUser().getProfileImage();
         this.commentContent = notice.getComment().getContent();
         this.createDateTime = notice.getCreatedDate();
+        this.noticeStatus = notice.getNoticeStatus();
     }
 }
