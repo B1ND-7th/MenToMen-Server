@@ -35,7 +35,6 @@ public class NoticeService {
         return noticeResponseDtos;
     }
 
-    @Transactional
     protected void updateNoticeStatus(List<Notice> notices) {
         for (Notice notice : notices) {
             notice.updateNoticeStatus();
