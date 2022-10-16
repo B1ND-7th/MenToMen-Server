@@ -84,7 +84,7 @@ public class PostService {
     }
 
     public List<PostResponseDto> search(String keyWord) {
-        return postRepository.findByContentContaining(keyWord).stream()
+        return postRepository.findByContentContaining(keyWord, Sort.by(Sort.Direction.DESC, "id") ).stream()
                 .map(post -> new PostResponseDto(post)).collect(Collectors.toList());
     }
 }
