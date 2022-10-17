@@ -19,7 +19,7 @@ import java.util.List;
 
 @Api(tags = "Post-Controller")
 @RestController
-@RequestMapping(value = "/post")
+@RequestMapping(value = "/api/post")
 @RequiredArgsConstructor
 public class PostController {
 

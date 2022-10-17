@@ -17,7 +17,7 @@ import project.bind.MenToMen.global.response.DataResponse;
 @Api(tags = "Auth-Controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;
