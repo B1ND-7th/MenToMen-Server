@@ -14,7 +14,7 @@ import java.util.List;
 
 @Api(tags = "File-Controller")
 @RestController
-@RequestMapping("/api/file")
+@RequestMapping("/file")
 @RequiredArgsConstructor
 public class FileController {
 

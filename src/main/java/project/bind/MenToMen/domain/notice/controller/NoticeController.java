@@ -14,7 +14,7 @@ import project.bind.MenToMen.global.response.DataResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/notice")
+@RequestMapping("/notice")
 @RequiredArgsConstructor
 public class NoticeController {
 

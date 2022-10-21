@@ -17,7 +17,7 @@ import project.bind.MenToMen.global.response.DataResponse;
 @Api(tags = "Auth-Controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -31,8 +31,6 @@ public class AuthController {
     @PostMapping("/code")
     public ResponseEntity<DataResponse<TokenResponseDto>> resCode(@RequestBody DAuthClientRequestDto dAuthClientRequestDto){
         TokenResponseDto token = authService.getToken(new DAuthApiRequestDto(dAuthClientRequestDto.getCode(), clientId, clientSecret));
-        System.out.println("accessToken = " + token.getAccessToken());
-        System.out.println("refreshToken = " + token.getRefreshToken());
         return DataResponse.ok("인증 성공", token);
     }
 
