@@ -38,7 +38,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void save(User user, CommentSubmitDto commentSubmitDto) {
+    public void save(final User user, CommentSubmitDto commentSubmitDto) {
         Post post = postRepository.findById(commentSubmitDto.getPostId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
         Comment comment = commentRepository.save(commentSubmitDto.toEntity(user, post, commentSubmitDto));
@@ -46,19 +46,31 @@ public class CommentService {
     }
 
     @Transactional
-    public void update(User user, CommentUpdateDto commentUpdateDto) {
+    public void update(final User user, CommentUpdateDto commentUpdateDto) {
         Comment comment = commentRepository.findById(commentUpdateDto.getCommentId())
                 .orElseThrow(() -> new CustomError(ErrorCode.NOT_FOUND));
+
+        checkAuthor(comment.getUser().getId(), user.getId());
+
         comment.update(commentUpdateDto);
+
         commentRepository.save(comment);
     }
 
     @Transactional
-    public void deleteById(User user, final Long id) {
-        if (!(commentRepository.existsById(id))) {
-            throw CustomError.of(ErrorCode.PARAMETER_IS_BAD);
+    public void deleteById(final User user, final Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> CustomError.of(ErrorCode.PARAMETER_IS_BAD));
+
+        checkAuthor(comment.getUser().getId(), user.getId());
+
+        commentRepository.delete(comment);
+    }
+
+    private void checkAuthor(Long authorId, Long userId) {
+        if(authorId!=userId) {
+            throw CustomError.of(ErrorCode.WRONG_USER);
         }
-        commentRepository.deleteById(id);
     }
 
 }
